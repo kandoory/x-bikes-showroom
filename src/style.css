@@ -1,0 +1,85 @@
+:root {
+  --red: #CC0000;           /* TBD — من الـ CI */
+  --ink: #1A1A1A;
+  --paper: #F4F4F4;
+  --glass: rgba(20, 20, 22, 0.72);
+  --font: "Segoe UI", Tahoma, "Noto Sans Arabic", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #111; color: #fff; font-family: var(--font); }
+#scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; }
+
+#loading { position: fixed; inset: 0; display: grid; place-items: center; font-size: 18px; color: #ccc; }
+
+/* ---------- HUD ---------- */
+#hud {
+  position: fixed; top: 0; inset-inline: 0;
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between;
+  padding: max(10px, env(safe-area-inset-top)) 12px 10px;
+  pointer-events: none;
+}
+#hud > * { pointer-events: auto; }
+#floors { display: flex; gap: 6px; flex-wrap: wrap; }
+#hud button {
+  font: 600 14px var(--font); color: #fff; background: var(--glass);
+  border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+#hud button:hover { border-color: rgba(255,255,255,0.4); }
+#hud button.active { background: var(--red); border-color: var(--red); }
+#hud .right { display: flex; gap: 8px; align-items: center; }
+#floorBadge {
+  font-size: 13px; padding: 7px 12px; border-radius: 999px; background: var(--glass); color: #ddd; white-space: nowrap;
+}
+#togglePanel {
+  position: absolute; top: calc(100% - 2px); inset-inline-end: 12px;
+  display: grid; gap: 4px; padding: 10px 14px; border-radius: 14px; background: var(--glass);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); min-width: 150px;
+}
+#togglePanel[hidden] { display: none; }
+#togglePanel label { display: flex; gap: 8px; align-items: center; font-size: 15px; padding: 6px 2px; cursor: pointer; }
+#togglePanel input { width: 18px; height: 18px; accent-color: var(--red); }
+
+/* ---------- joystick (touch only) ---------- */
+#joystick {
+  position: fixed; left: 24px; bottom: max(24px, env(safe-area-inset-bottom));
+  width: 130px; height: 130px; border-radius: 50%;
+  background: rgba(20,20,22,0.35); border: 2px solid rgba(255,255,255,0.25);
+  display: none; place-items: center; touch-action: none;
+}
+body.touch #joystick { display: grid; }
+#stick { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.85); pointer-events: none; }
+
+#resume {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  background: var(--glass); padding: 10px 16px; border-radius: 999px; font-size: 14px; white-space: nowrap;
+}
+
+/* ---------- start screen ---------- */
+#start {
+  position: fixed; inset: 0; display: grid; place-items: center; padding: 16px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.35), rgba(0,0,0,0.75));
+}
+#start[hidden] { display: none; }
+#start .card {
+  width: min(460px, 100%); background: rgba(18,18,20,0.92); border-radius: 18px; padding: 26px 24px;
+  border-top: 4px solid var(--red); box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+#start h1 { margin: 0 0 4px; font-size: 26px; letter-spacing: 0.5px; direction: ltr; text-align: right; }
+#start .sub { margin: 0 0 16px; color: #bbb; }
+#start ul { margin: 0 0 20px; padding-inline-start: 18px; line-height: 2; color: #ddd; }
+#start .note { margin: 14px 0 0; font-size: 12px; color: #888; }
+#startBtn {
+  width: 100%; font: 700 17px var(--font); color: #fff; background: var(--red); border: 0; border-radius: 12px;
+  padding: 14px; cursor: pointer;
+}
+kbd {
+  display: inline-block; min-width: 22px; padding: 1px 6px; margin: 0 2px; border-radius: 5px;
+  background: #2a2b2f; border: 1px solid #44464c; font: 12px/1.6 ui-monospace, Consolas, monospace; text-align: center; color: #fff;
+}
+
+@media (max-width: 560px) {
+  #hud button { padding: 7px 11px; font-size: 13px; }
+  #floorBadge { display: none; }
+}

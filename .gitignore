@@ -1,0 +1,9 @@
+# OS junk
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
+
+# Big raw videos stay local (GitHub limit is 100MB per file) — upload frames instead
+references/02 - Video & Frames/*.mov
+references/02 - Video & Frames/*.MOV
